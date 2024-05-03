@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs7v0xux48dk4"]
+
+[ext_resource type="Script" path="res://scripts/TextFile.gd" id="1_vjclw"]
+
+[node name="Textfile" type="Node" groups=["textfile"]]
+script = ExtResource("1_vjclw")

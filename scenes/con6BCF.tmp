@@ -1,0 +1,229 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvk4l7cupusde"]
+
+[ext_resource type="Script" path="res://scripts/Console.gd" id="1_651lt"]
+[ext_resource type="Theme" uid="uid://bc8lcp6kcuoqo" path="res://materials/theme.tres" id="2_sky4i"]
+[ext_resource type="Script" path="res://scripts/ScrollText.gd" id="3_nmsm1"]
+[ext_resource type="Script" path="res://scripts/Editor.gd" id="4_fywty"]
+[ext_resource type="Script" path="res://scripts/ImageViewer.gd" id="5_s11sk"]
+[ext_resource type="Texture2D" uid="uid://bsa62xbq1erre" path="res://textures/TV.png" id="8_v8dvs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fle4h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rde4f"]
+
+[sub_resource type="Environment" id="Environment_vugou"]
+background_mode = 3
+background_energy_multiplier = 2.33
+tonemap_mode = 2
+tonemap_exposure = 2.07
+glow_enabled = true
+glow_levels/3 = 0.18
+glow_intensity = 0.6
+glow_strength = 1.05
+glow_bloom = 1.0
+glow_hdr_threshold = 1.15
+
+[node name="Console" type="Node"]
+
+[node name="Console" type="Node2D" parent="."]
+script = ExtResource("1_651lt")
+
+[node name="ColorRect" type="ColorRect" parent="Console"]
+offset_right = 1029.0
+offset_bottom = 768.0
+color = Color(0.019606, 0.0245583, 0.0463429, 1)
+
+[node name="Path" type="RichTextLabel" parent="Console"]
+offset_left = 35.0
+offset_top = 683.0
+offset_right = 490.0
+offset_bottom = 717.0
+theme = ExtResource("2_sky4i")
+scroll_following = true
+script = ExtResource("3_nmsm1")
+
+[node name="ConsoleText" type="RichTextLabel" parent="Console"]
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 484.0
+offset_bottom = 665.0
+theme = ExtResource("2_sky4i")
+scroll_following = true
+script = ExtResource("3_nmsm1")
+
+[node name="TextEdit" type="TextEdit" parent="Console"]
+offset_left = 50.0
+offset_top = 721.0
+offset_right = 500.0
+offset_bottom = 767.0
+theme = ExtResource("2_sky4i")
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_constants/outline_size = 0
+theme_override_constants/caret_width = 2
+caret_blink = true
+
+[node name="Cursor" type="RichTextLabel" parent="Console"]
+offset_left = 34.0
+offset_top = 726.0
+offset_right = 52.0
+offset_bottom = 755.0
+theme = ExtResource("2_sky4i")
+text = ">"
+
+[node name="Seperator3" type="RichTextLabel" parent="Console"]
+offset_left = 34.0
+offset_top = 653.0
+offset_right = 511.0
+offset_bottom = 686.0
+theme = ExtResource("2_sky4i")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+
+[node name="Seperator2" type="RichTextLabel" parent="Console"]
+offset_left = 35.0
+offset_top = 695.0
+offset_right = 512.0
+offset_bottom = 724.0
+theme = ExtResource("2_sky4i")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+
+[node name="Seperator" type="RichTextLabel" parent="Console"]
+offset_left = 505.0
+offset_top = 1.0
+offset_right = 560.0
+offset_bottom = 770.0
+theme = ExtResource("2_sky4i")
+text = "|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|"
+
+[node name="Editor" type="Node2D" parent="Console"]
+script = ExtResource("4_fywty")
+
+[node name="TextEditor" type="TextEdit" parent="Console/Editor"]
+offset_left = 516.0
+offset_top = 45.0
+offset_right = 986.0
+offset_bottom = 661.0
+theme = ExtResource("2_sky4i")
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0)
+theme_override_constants/outline_size = 0
+theme_override_constants/caret_width = 2
+caret_blink = true
+
+[node name="Seperator" type="RichTextLabel" parent="Console/Editor"]
+offset_left = 516.0
+offset_top = 19.0
+offset_right = 993.0
+offset_bottom = 48.0
+theme = ExtResource("2_sky4i")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "
+
+[node name="Title" type="RichTextLabel" parent="Console/Editor"]
+offset_left = 515.0
+offset_top = 12.0
+offset_right = 990.0
+offset_bottom = 40.0
+theme = ExtResource("2_sky4i")
+text = "Text Editor"
+
+[node name="Button" type="Button" parent="Console/Editor"]
+offset_left = 827.0
+offset_top = 8.0
+offset_right = 979.0
+offset_bottom = 39.0
+theme = ExtResource("2_sky4i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fle4h")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rde4f")
+text = "Save and Close"
+
+[node name="ImageViewer" type="Node2D" parent="Console"]
+position = Vector2(508, 454)
+script = ExtResource("5_s11sk")
+
+[node name="Seperator3" type="RichTextLabel" parent="Console/ImageViewer"]
+offset_left = 3.0
+offset_top = -16.0
+offset_right = 495.0
+offset_bottom = 17.0
+theme = ExtResource("2_sky4i")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+
+[node name="Seperator4" type="RichTextLabel" parent="Console/ImageViewer"]
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 496.0
+offset_bottom = 48.0
+theme = ExtResource("2_sky4i")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+
+[node name="Texture" type="TextureRect" parent="Console/ImageViewer"]
+offset_left = 11.0
+offset_top = 38.0
+offset_right = 492.0
+offset_bottom = 299.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="Console/ImageViewer"]
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 480.0
+offset_bottom = 37.0
+theme = ExtResource("2_sky4i")
+text = "Image Viewer"
+
+[node name="Overlay" type="Node" parent="."]
+
+[node name="Tv" type="Sprite2D" parent="Overlay"]
+position = Vector2(512, 384.75)
+scale = Vector2(0.345312, 0.355787)
+texture = ExtResource("8_v8dvs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vugou")
+
+[connection signal="pressed" from="Console/Editor/Button" to="Console/Editor" method="_on_button_pressed"]

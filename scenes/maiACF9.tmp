@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://di5yv2n8sntkt"]
+
+[ext_resource type="Script" path="res://scripts/Console.gd" id="1_aefcr"]
+[ext_resource type="Script" path="res://scripts/ScrollText.gd" id="3_cw7va"]
+[ext_resource type="PackedScene" uid="uid://b2afewxp5d7uy" path="res://scenes/folder.tscn" id="4_4e0ud"]
+[ext_resource type="Material" uid="uid://c5eooarje6r55" path="res://materials/overlay.tres" id="4_g6s05"]
+[ext_resource type="Theme" uid="uid://bc8lcp6kcuoqo" path="res://materials/theme.tres" id="4_m8ytj"]
+[ext_resource type="Texture2D" uid="uid://cd4plb6c3jqdk" path="res://textures/VHS_08.png" id="5_rumkb"]
+[ext_resource type="PackedScene" uid="uid://bs7v0xux48dk4" path="res://scenes/textfile.tscn" id="5_uypq8"]
+[ext_resource type="Texture2D" uid="uid://bsa62xbq1erre" path="res://textures/TV.png" id="6_etdqe"]
+
+[node name="root" type="Node2D"]
+
+[node name="Console" type="Node2D" parent="."]
+script = ExtResource("1_aefcr")
+
+[node name="ColorRect" type="ColorRect" parent="Console"]
+offset_right = 1029.0
+offset_bottom = 768.0
+color = Color(0.0253638, 0.0253638, 0.0253638, 1)
+
+[node name="Path" type="RichTextLabel" parent="Console"]
+offset_left = 35.0
+offset_top = 683.0
+offset_right = 490.0
+offset_bottom = 717.0
+theme = ExtResource("4_m8ytj")
+scroll_following = true
+script = ExtResource("3_cw7va")
+
+[node name="ConsoleText" type="RichTextLabel" parent="Console"]
+offset_left = 37.0
+offset_top = 15.0
+offset_right = 484.0
+offset_bottom = 675.0
+theme = ExtResource("4_m8ytj")
+scroll_following = true
+script = ExtResource("3_cw7va")
+
+[node name="TextEdit" type="TextEdit" parent="Console"]
+offset_left = 50.0
+offset_top = 721.0
+offset_right = 500.0
+offset_bottom = 767.0
+theme = ExtResource("4_m8ytj")
+theme_override_constants/outline_size = 0
+theme_override_constants/caret_width = 2
+caret_blink = true
+
+[node name="Cursor" type="RichTextLabel" parent="Console"]
+offset_left = 34.0
+offset_top = 726.0
+offset_right = 52.0
+offset_bottom = 755.0
+theme = ExtResource("4_m8ytj")
+text = ">"
+
+[node name="Seperator3" type="RichTextLabel" parent="Console"]
+offset_left = 34.0
+offset_top = 653.0
+offset_right = 511.0
+offset_bottom = 682.0
+theme = ExtResource("4_m8ytj")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "
+
+[node name="Seperator2" type="RichTextLabel" parent="Console"]
+offset_left = 35.0
+offset_top = 695.0
+offset_right = 512.0
+offset_bottom = 724.0
+theme = ExtResource("4_m8ytj")
+text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "
+
+[node name="Seperator" type="RichTextLabel" parent="Console"]
+offset_left = 505.0
+offset_top = 1.0
+offset_right = 560.0
+offset_bottom = 770.0
+theme = ExtResource("4_m8ytj")
+text = "|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+"
+
+[node name="FileSystem" type="Node" parent="."]
+
+[node name="user" parent="FileSystem" instance=ExtResource("4_4e0ud")]
+
+[node name="home" parent="FileSystem/user" instance=ExtResource("4_4e0ud")]
+
+[node name="textfile" parent="FileSystem/user/home" instance=ExtResource("5_uypq8")]
+text = "hello world
+example text"
+
+[node name="folder1" parent="FileSystem/user/home" instance=ExtResource("4_4e0ud")]
+
+[node name="test_txt" parent="FileSystem/user/home/folder1" instance=ExtResource("5_uypq8")]
+
+[node name="folder2" parent="FileSystem/user/home" instance=ExtResource("4_4e0ud")]
+
+[node name="Overlay" type="Node" parent="."]
+
+[node name="Vhs08" type="Sprite2D" parent="Overlay"]
+visible = false
+material = ExtResource("4_g6s05")
+position = Vector2(513.5, 378)
+scale = Vector2(0.271615, 0.363889)
+texture = ExtResource("5_rumkb")
+
+[node name="Tv" type="Sprite2D" parent="Overlay"]
+position = Vector2(512, 384.75)
+scale = Vector2(0.345312, 0.355787)
+texture = ExtResource("6_etdqe")
+
+[connection signal="focus_entered" from="Console/TextEdit" to="Console" method="_on_text_edit_focus_entered"]
+[connection signal="gutter_added" from="Console/TextEdit" to="Console" method="_on_text_edit_gutter_added"]

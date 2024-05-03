@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://di5yv2n8sntkt"]
+
+[ext_resource type="PackedScene" uid="uid://bvk4l7cupusde" path="res://scenes/console.tscn" id="1_tcrs0"]
+[ext_resource type="PackedScene" uid="uid://b2afewxp5d7uy" path="res://scenes/folder.tscn" id="2_1s5l5"]
+[ext_resource type="PackedScene" uid="uid://bs7v0xux48dk4" path="res://scenes/textfile.tscn" id="3_jbjbf"]
+[ext_resource type="PackedScene" uid="uid://c0y0hktw5pth2" path="res://scenes/image.tscn" id="4_geek6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4etjf"]
+
+[sub_resource type="Environment" id="Environment_w33r3"]
+background_mode = 3
+background_energy_multiplier = 2.33
+tonemap_mode = 2
+tonemap_exposure = 2.07
+glow_enabled = true
+glow_levels/3 = 0.18
+glow_intensity = 0.6
+glow_strength = 1.05
+glow_bloom = 1.0
+glow_hdr_threshold = 1.15
+
+[node name="root" type="Node2D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("BoxMesh_4etjf")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.785209, 0.195439, -0.58758, 0, 0.948887, 0.315616, 0.619231, -0.247824, 0.745075, -3.04359, 2.12936, 3.68408)
+fov = 54.3713
+
+[node name="Console" parent="." instance=ExtResource("1_tcrs0")]
+
+[node name="FileSystem" type="Node" parent="."]
+
+[node name="user" parent="FileSystem" instance=ExtResource("2_1s5l5")]
+
+[node name="home" parent="FileSystem/user" instance=ExtResource("2_1s5l5")]
+
+[node name="textfile_txt" parent="FileSystem/user/home" instance=ExtResource("3_jbjbf")]
+text = "hello world
+example text"
+
+[node name="folder1" parent="FileSystem/user/home" instance=ExtResource("2_1s5l5")]
+
+[node name="test_txt" parent="FileSystem/user/home/folder1" instance=ExtResource("3_jbjbf")]
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+"
+
+[node name="folder2" parent="FileSystem/user/home" instance=ExtResource("2_1s5l5")]
+
+[node name="testimg_png" parent="FileSystem/user/home" instance=ExtResource("4_geek6")]
+filepath = "testImage.jpg"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w33r3")

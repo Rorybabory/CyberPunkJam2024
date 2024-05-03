@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2afewxp5d7uy"]
+
+[ext_resource type="Script" path="res://scripts/Folder.gd" id="1_no7wy"]
+
+[node name="folder" type="Node" groups=["folder"]]
+script = ExtResource("1_no7wy")
