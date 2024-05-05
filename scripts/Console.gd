@@ -11,21 +11,25 @@ var lastindex = 0
 
 var editorNode
 
-@export var startText: String = "Station 37 (Workstation Edition)
+@export var startText: String = "Workstation 37 (Security Edition)
 Version 6.0451.5
 
 "
 
-var helpText = "clear: Clears the console view
+var helpText = "
+security: open security camera view
+
+edit [file]: opens editor for specific file
+clear: Clears the console view
 help: Opens help menu
 cd [path]: Change directories
 dir/ls: list files in a directory
 cat [text file]: view contents of a text file
 mkdir [folder]: create a new folder
-edit [file]: opens editor for specific file
+
 "
 
-@onready var activeFolder = get_node("../../FileSystem/user/home")
+@onready var activeFolder = get_node("../FileSystem/user/home")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -168,5 +172,14 @@ func run_command(str):
 			$ImageViewer.setTexture(next.filepath)
 		else:
 			$ConsoleText.scroll_text("[color=red]ERROR: NON IMAGE FILE[/color]\n")
+	elif (command == "security"):
+		$Security.show()
+		$ConsoleText.scroll_text("VIEWING CAMERA\n")
 	else:
 		$ConsoleText.scroll_text("[color=red]INVALID COMMAND: " + str(command) + "\ntype help for list of commands[/color]\n")
+
+
+func _on_switchcamera_pressed():
+	$Security.switchCamera()
+
+	pass # Replace with function body.

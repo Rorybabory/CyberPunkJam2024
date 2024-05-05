@@ -1,15 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvk4l7cupusde"]
+[gd_scene load_steps=14 format=3 uid="uid://bvk4l7cupusde"]
 
 [ext_resource type="Script" path="res://scripts/Console.gd" id="1_651lt"]
 [ext_resource type="Theme" uid="uid://bc8lcp6kcuoqo" path="res://materials/theme.tres" id="2_sky4i"]
 [ext_resource type="Script" path="res://scripts/ScrollText.gd" id="3_nmsm1"]
 [ext_resource type="Script" path="res://scripts/Editor.gd" id="4_fywty"]
 [ext_resource type="Script" path="res://scripts/ImageViewer.gd" id="5_s11sk"]
+[ext_resource type="Shader" path="res://shaders/postprocessing.gdshader" id="7_bmnhs"]
+[ext_resource type="Shader" path="res://shaders/bloom.gdshader" id="7_j3yop"]
 [ext_resource type="Texture2D" uid="uid://bsa62xbq1erre" path="res://textures/TV.png" id="8_v8dvs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fle4h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rde4f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gnq1"]
+shader = ExtResource("7_j3yop")
+shader_parameter/blur_type = 0
+shader_parameter/blur_amount = 16
+shader_parameter/blur_radius = 1.0
+shader_parameter/blur_direction = Vector2(1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_715ku"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w71rh"]
+shader = ExtResource("7_bmnhs")
 
 [node name="Console" type="Node"]
 
@@ -19,7 +33,7 @@ script = ExtResource("1_651lt")
 [node name="ColorRect" type="ColorRect" parent="Console"]
 offset_right = 1029.0
 offset_bottom = 768.0
-color = Color(0.019606, 0.0245583, 0.0463429, 1)
+color = Color(0.0372884, 0.089387, 0.184336, 1)
 
 [node name="Path" type="RichTextLabel" parent="Console"]
 offset_left = 35.0
@@ -213,12 +227,29 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_fle4h")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rde4f")
 text = "X"
 
-[node name="Overlay" type="Node" parent="."]
+[node name="Overlay" type="Node" parent="Console"]
 
-[node name="Tv" type="Sprite2D" parent="Overlay"]
+[node name="Tv" type="Sprite2D" parent="Console/Overlay"]
+visible = false
 position = Vector2(512, 384.75)
 scale = Vector2(0.345312, 0.355787)
 texture = ExtResource("8_v8dvs")
+
+[node name="BLOOM" type="CanvasLayer" parent="Console/Overlay"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Console/Overlay/BLOOM"]
+material = SubResource("ShaderMaterial_8gnq1")
+position = Vector2(515.691, 383.192)
+scale = Vector2(1032.62, 768.383)
+mesh = SubResource("QuadMesh_715ku")
+
+[node name="CRT" type="CanvasLayer" parent="Console/Overlay"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Console/Overlay/CRT"]
+material = SubResource("ShaderMaterial_w71rh")
+position = Vector2(515.691, 383.192)
+scale = Vector2(1032.62, 768.383)
+mesh = SubResource("QuadMesh_715ku")
 
 [connection signal="pressed" from="Console/Editor/Button" to="Console/Editor" method="_on_button_pressed"]
 [connection signal="pressed" from="Console/ImageViewer/Button" to="Console/ImageViewer" method="_on_button_pressed"]
