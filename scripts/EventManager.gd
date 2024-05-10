@@ -59,9 +59,9 @@ func eventTrigger():
 	if (randf_range(0,1.0) < 0.15):
 		if (created_text == 0):
 			createFile("hello.txt", text1+"\n")
-		if (created_text == 1):
+		elif (created_text == 1):
 			createFile("hide.txt", text2+"\n")
-		if (created_text == 1):
+		elif (created_text == 2):
 			createFile("escape.txt", text3+"\n")
 		pass
 	pass

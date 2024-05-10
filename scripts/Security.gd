@@ -26,7 +26,7 @@ func _process(delta):
 	if (disabled == true):
 		$Screen.material.set_shader_parameter("color", Vector4(0.02,0.02,0.02,1))
 		disableTimer+=delta
-		if (disableTimer > 0.6):
+		if (disableTimer > 1.0):
 			disabled = false
 			disableTimer = 0
 		return
